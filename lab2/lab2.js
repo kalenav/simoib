@@ -68,6 +68,5 @@ function vigenere_bruteforce(message, plaintext, key_length)
                 key[i] = 0;
             }
         }
-        console.log(key);
     }
 }
