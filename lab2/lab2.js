@@ -44,7 +44,29 @@ function vigenere_decode(message, key)
     return result;
 }
 
-function a()
+function vigenere_bruteforce(message, plaintext, key_length)
 {
-    return String.fromCharCode(97);
+    var key = new Array(key_length).fill(0);
+    while(true)
+    {
+        var curr_key_string = key.map(v => String.fromCharCode(v + 97)).join('');
+        if(vigenere_decode(message, curr_key_string) == plaintext)
+        {
+            return curr_key_string;
+        }
+        var curr_pos = key_length - 1;
+        while(curr_pos > -1 && key[curr_pos] == 26) curr_pos--;
+        if(curr_pos == -1) 
+        {
+            return "KEY NOT FOUND";
+        }
+        else
+        {
+            key[curr_pos]++;
+            for(let i = curr_pos + 1; i < key_length; i++)
+            {
+                key[i] = 0;
+            }
+        }
+    }
 }
